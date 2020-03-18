@@ -12,6 +12,9 @@ This project's name is from the famous TV series Rick and Morty.
 ## Known Bugs
 - If you don't type in the number of students and just press  `Enter`, then the program will show sorted numbers from `1` to `1000`.
 - Only supports Chinese.
+
+# Package Used
+- [MaterialDesignInXamlToolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
 ## 命名灵感
 灵感来源于瑞克和莫蒂 `S4E3`。
 ## 特点
