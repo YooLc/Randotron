@@ -35,14 +35,19 @@ namespace RandotronWPF
         private void InitAll()
         {
             StuNumConfirmed = false;
+            StudentCount = 0;
             StuNumPanel.Visibility = Visibility.Hidden;
             CurrentStudent = 0;
+            NumberTextBox.Text = "";
+            PreText.Content = NxtText.Content = CurText.Content = "";
             ProgressBar.Value = 0;
         }
 
         private void EnableMode()
         {
             if (ModeSelector.SelectedIndex == 0) StuNumPanel.Visibility = Visibility.Visible;
+            if (ModeSelector.SelectedIndex != 1) FileBtn.Visibility = Visibility.Hidden;
+            else FileBtn.Visibility = Visibility.Visible;
         }
 
         private void Random_Shuffle()
@@ -72,9 +77,9 @@ namespace RandotronWPF
             NxtText.Content = Cur + 1 < StudentCount ? StudentNumList[Cur + 1].ToString() : "";
         }
 
-        private int GetStudentNumber(TextBox textBox)
+        private int GetStudentNumber(TextBox TextBox)
         {
-            string content = textBox.Text;
+            string content = TextBox.Text;
             int t = 0;
             for (int i = 0; i < content.Length; ++i)
             {
@@ -85,7 +90,7 @@ namespace RandotronWPF
             return t;
         }
 
-        private void PopUpBarConfirmed(object sender, RoutedEventArgs e) { PopUpBar.IsActive = false; }
+        private void PopUpBarConfirmed(object sender, RoutedEventArgs e) { PopUpBar.IsActive = false; FocusBox.Focus(); }
         private void PopUp(string Message)
         {
             PopUpBarMessage.Content = Message;
@@ -98,7 +103,35 @@ namespace RandotronWPF
             EnableMode();
         }
 
+        private bool GetComfirmStatus() { return StuNumConfirmed; }
+        private void RolltoLeft()
+        {
+            if (!GetComfirmStatus()) { PopUp("无效操作"); return; }
+            CurrentStudent -= 1;
+            if (CurrentStudent == -1) { PopUp("到头了 已重新生成"); ClearAndShow(); }
+            UpdateText(CurrentStudent);
+            double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
+            ProgressBar.Value = goal;
+        }
+
+        private void RolltoRight()
+        {
+            if (!GetComfirmStatus()) { PopUp("无效操作"); return; }
+            CurrentStudent += 1;
+            if (CurrentStudent >= StudentCount) { PopUp("到头了 已重新生成"); ClearAndShow(); }
+            UpdateText(CurrentStudent);
+            double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
+            ProgressBar.Value = goal;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) RolltoRight();
+        }
+
         // Functions
+        private void PreBtnClicked(object sender, RoutedEventArgs e) { RolltoLeft(); FocusBox.Focus(); }
+        private void NxtBtnClicked(object sender, RoutedEventArgs e) { RolltoRight(); FocusBox.Focus(); }
         private void NumberModeConfirmed(object sender, RoutedEventArgs e)
         {
             int Tnumber = GetStudentNumber(NumberTextBox);
@@ -112,17 +145,15 @@ namespace RandotronWPF
             FocusBox.Focus();
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void FileModeConfirmed(object sender, RoutedEventArgs e)
         {
-            if (ModeSelector.SelectedIndex == 0 && StuNumConfirmed == false) return;
-            if (ModeSelector.SelectedIndex != 0) { PopUp("目前仅支持学号模式"); return;}
-            if (e.Key == Key.Enter)
+            // PopUp("哦哦哦");
+            Microsoft.Win32.OpenFileDialog FileDialog = new Microsoft.Win32.OpenFileDialog();
+            FileDialog.Filter = "Excel 表格 (*.xlsx , *.xls) | *.xlsx; *.xls";
+            if (FileDialog.ShowDialog() == true)
             {
-                CurrentStudent += 1;
-                if (CurrentStudent == StudentCount) ClearAndShow();
-                UpdateText(CurrentStudent);
-                double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
-                ProgressBar.Value = goal;
+                // DataTable dt = GetData("E:\\test.xls");
+                PopUp(FileDialog.FileName); 
             }
         }
     }
