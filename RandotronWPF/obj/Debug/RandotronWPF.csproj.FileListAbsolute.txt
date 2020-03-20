@@ -6,13 +6,10 @@ F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\RandotronWPF.exe
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\RandotronWPF.exe
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\RandotronWPF.pdb
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\ControlzEx.dll
-F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\MahApps.Metro.dll
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\MaterialDesignColors.dll
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\MaterialDesignThemes.Wpf.dll
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\System.Windows.Interactivity.dll
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\ControlzEx.pdb
-F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\MahApps.Metro.pdb
-F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\MahApps.Metro.xml
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\MaterialDesignColors.pdb
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\MaterialDesignThemes.Wpf.pdb
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\MaterialDesignThemes.Wpf.xml

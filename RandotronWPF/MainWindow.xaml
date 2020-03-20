@@ -15,7 +15,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBox x:Name="virtualTextBox" Width="0" Height="0"/>
+            <TextBox x:Name="FocusBox" Width="0" Height="0" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
@@ -23,20 +23,20 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <Label x:Name="label" Content="Randotron" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" FontFamily="Exo 2" FontSize="30" FontWeight="Bold" Foreground="#FF000000"/>
+                    <Label x:Name="label" Content="Randotron" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Exo 2" FontSize="30" FontWeight="Bold" Foreground="#FF000000"/>
                 </Grid>
                 <Grid Grid.Column="1">
-                <StackPanel Orientation="Horizontal">
-                   <TextBox
-                x:Name="numberTextBox"
-                materialDesign:HintAssist.Foreground="Green"
-                materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"
-                Width="200"
-                Margin="10,0,0,0">
-                        <materialDesign:HintAssist.Hint>
+                <StackPanel Orientation="Horizontal" x:Name="StuNumPanel">
+                    <TextBox
+                    x:Name="NumberTextBox"
+                    materialDesign:HintAssist.Foreground="Green"
+                    materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Margin="10,0,0,0">
+                            <materialDesign:HintAssist.Hint>
                             <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
                                 <materialDesign:PackIcon Kind="AccountTick" />
                                 <TextBlock Margin="2 0 0 0" FontFamily="怀源黑体 CN">学生人数</TextBlock>
@@ -48,22 +48,23 @@
                     materialDesign:ShadowAssist.ShadowDepth="Depth2"
                     HorizontalAlignment="Center"
                     ToolTip="MaterialDesignFloatingActionMiniButton"
-                    Click="numberModeConfirmed"
+                    Click="NumberModeConfirmed"
                     Margin="10,0,0,0" Background="#DD000000" BorderBrush="#DD000000" Height="30" Width="30">
                         <materialDesign:PackIcon
                             Kind="CheckBold"
-                           Height="20"
+                            Height="20"
                             Width="20" />
                     </Button>
                 </StackPanel>
                 </Grid>
                 <Grid Grid.Column="2">
                     <ComboBox
-                    x:Name="ModeSelect"
+                    x:Name="ModeSelector"
                     Width="40"
-                    Margin="0,0,10,0"
+                    Margin="0 0 10 0"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    SelectionChanged="ModeSelectorChange">
                         <Label>学号</Label>
                         <Label>人名</Label>
                         <Label>照片</Label>
@@ -71,7 +72,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" x:Name="stuGrid">
+        <Grid Grid.Row="1" x:Name="StuGrid">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -79,22 +80,22 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid Margin="0,0,0,10" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label x:Name="preText" FontFamily="Exo 2, Source Han Sans" FontSize="50" FontWeight="ExtraBold" Foreground="Gray"></Label>
+                    <Label x:Name="PreText" FontFamily="Exo 2, 怀源黑体 CN" FontSize="50" FontWeight="ExtraBold" Foreground="Gray"></Label>
                 </Grid>
                 <Grid Margin="0,0,0,10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label x:Name="curText" FontFamily="Exo 2, Source Han Sans" FontSize="80" FontWeight="ExtraBold" Foreground="Black"></Label>
+                    <Label x:Name="CurText" FontFamily="Exo 2, 怀源黑体 CN" FontSize="80" FontWeight="ExtraBold" Foreground="Black"></Label>
                 </Grid>
                 <Grid Margin="0,0,0,10" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label x:Name="nxtText" FontFamily="Exo 2, Source Han Sans" FontSize="50" FontWeight="ExtraBold" Foreground="Gray"></Label>
+                    <Label x:Name="NxtText" FontFamily="Exo 2, 怀源黑体 CN" FontSize="50" FontWeight="ExtraBold" Foreground="Gray"></Label>
                 </Grid>
             </Grid>
             <ProgressBar x:Name="ProgressBar" VerticalAlignment="Bottom" Height="10" Value="0" Foreground="#FF151515" BorderBrush="#FF474747" Background="#FF404040"/>
             <materialDesign:Snackbar
                 IsActive="False"
-                x:Name="SnackbarTwo">
+                x:Name="PopUpBar">
                 <materialDesign:SnackbarMessage
-                    x:Name="SnackbarTwoMessage"
-                    ActionClick="SnackbarConfirmed"
+                    x:Name="PopUpBarMessage"
+                    ActionClick="PopUpBarConfirmed"
                     Content=""
                     ActionContent="确认" />
             </materialDesign:Snackbar>
