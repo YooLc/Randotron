@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,10 +24,12 @@ namespace RandotronWPF
         const int MAXS = 1000;
         private int totStudent = 0, current = 0;
         private int[] studentNumList = new int[MAXS];
+        private int number;
+
         public MainWindow()
         {
             InitializeComponent();
-            clearAndShow();
+            ClearAndShow();
         }
         public int GetStudentNumber(TextBox textBox)
         {
@@ -45,19 +47,19 @@ namespace RandotronWPF
         {
             SnackbarTwo.IsActive = false;
         }
-        private void popUp(string Message)
+        private void PopUp(string Message)
         {
             SnackbarTwoMessage.Content = Message;
             SnackbarTwo.IsActive = true;
         }
-        private void numberModeConfirmed(object sender, RoutedEventArgs e)
+        private void NumberModeConfirmed(object sender, RoutedEventArgs e)
         {
-            int number = GetStudentNumber(numberTextBox);
-            if (number <= 0) { popUp("请输入正确的学生人数，范围为[1, 1000]"); return; }
-            if (number > MAXS) { popUp("最多仅允许 1000 个学生"); return; }
+            number = GetStudentNumber(numberTextBox);
+            if (number <= 0) { PopUp("请输入正确的学生人数，范围为[1, 1000]"); return; }
+            if (number > MAXS) { PopUp("最多仅允许 1000 个学生"); return; }
             numberTextBox.Text = number.ToString();
             totStudent = number;
-            clearAndShow();
+            ClearAndShow();
             preText.Content = current > 0 ? studentNumList[current - 1].ToString() : "";
             curText.Content = studentNumList[current].ToString();
             nxtText.Content = current + 1 < totStudent ? studentNumList[current + 1].ToString() : "";
@@ -76,7 +78,7 @@ namespace RandotronWPF
                 studentNumList[i] = tempValue;
             }
         }
-        private void clearAndShow()
+        private void ClearAndShow()
         {
             ModeSelect.SelectedIndex = 0;
             for (int i = 0; i < MAXS; ++i) studentNumList[i] = i + 1;
@@ -86,10 +88,10 @@ namespace RandotronWPF
         }
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter && number <= 1000 && number > 0)
             {
                 current += 1;
-                if (current == totStudent) clearAndShow();
+                if (current == totStudent) ClearAndShow();
                 preText.Content = current > 0 ? studentNumList[current - 1].ToString() : "";
                 curText.Content = studentNumList[current].ToString();
                 nxtText.Content = current + 1 < totStudent ? studentNumList[current + 1].ToString() : "";
