@@ -23,3 +23,4 @@ F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\RandotronWPF.csp
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\RandotronWPF.exe
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\RandotronWPF.pdb
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\App.baml
+F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\GeneratedInternalTypeHelper.g.cs

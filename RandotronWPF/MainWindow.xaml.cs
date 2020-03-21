@@ -91,7 +91,7 @@ namespace RandotronWPF
         }
 
         private void PopUpBarConfirmed(object sender, RoutedEventArgs e) { PopUpBar.IsActive = false; FocusBox.Focus(); }
-        private void PopUp(string Message)
+        public void PopUp(string Message)
         {
             PopUpBarMessage.Content = Message;
             PopUpBar.IsActive = true;
@@ -120,8 +120,18 @@ namespace RandotronWPF
             CurrentStudent += 1;
             if (CurrentStudent >= StudentCount) { PopUp("到头了 已重新生成"); ClearAndShow(); }
             UpdateText(CurrentStudent);
+            double prev = StudentCount - 1 > 0 ? (double)(CurrentStudent) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
-            ProgressBar.Value = goal;
+            Thread PBthread = new Thread(new ThreadStart(() =>
+            {
+                for (int i = (int)System.Math.Ceiling(prev); i <= goal; ++i)
+                {
+                    this.ProgressBar.Dispatcher.BeginInvoke((ThreadStart)delegate { this.ProgressBar.Value = i; });
+                    Thread.Sleep(15);
+                }
+                this.ProgressBar.Dispatcher.BeginInvoke((ThreadStart)delegate { this.ProgressBar.Value = goal; });
+            }));
+            PBthread.Start();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -144,7 +154,7 @@ namespace RandotronWPF
             StuNumConfirmed = true;
             FocusBox.Focus();
         }
-
+        
         private void FileModeConfirmed(object sender, RoutedEventArgs e)
         {
             // PopUp("哦哦哦");

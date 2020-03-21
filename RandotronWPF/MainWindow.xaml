@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         KeyDown="Window_KeyDown"
-        x:Name="titleWindow"
+        x:Name="TitleWindow"
         Title="Randotron" Height="600" Width="800" MinWidth="580" MinHeight="300" Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
