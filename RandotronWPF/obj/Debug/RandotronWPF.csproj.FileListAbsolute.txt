@@ -25,3 +25,5 @@ F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\StuMode.g.cs
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\StuMode.baml
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\FileMode.g.cs
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\FileMode.baml
+F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\PhotoMode.g.cs
+F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\PhotoMode.baml

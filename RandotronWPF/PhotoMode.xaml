@@ -1,0 +1,105 @@
+﻿<Window x:Class="RandotronWPF.PhotoModeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RandotronWPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        KeyDown="Window_KeyDown"
+        x:Name="PhotoMode"
+        Title="Randotron" Height="600" Width="800" MinWidth="580" MinHeight="300" Topmost="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBox x:Name="FocusBox" Width="0" Height="0" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Label x:Name="label" Content="Randotron" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Exo 2" FontSize="30" FontWeight="Bold" Foreground="#FF000000"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button
+                    x:Name="FileBtn"
+                    Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                    HorizontalAlignment="Left"
+                    ToolTip="MaterialDesignFloatingActionMiniButton"
+                    Click="FileModeConfirmed"
+                    Margin="10 0 0 0" Background="#DD000000" BorderBrush="#DD000000" Height="30" Width="30">
+                        <materialDesign:PackIcon
+                            Kind="FileDocumentBoxPlusOutline"
+                            Height="20"
+                            Width="20" />
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <ComboBox
+                    x:Name="ModeSelector"
+                    Width="40"
+                    Margin="0 0 10 0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    SelectionChanged="ModeSelectorChange">
+                        <Label>学号</Label>
+                        <Label>人名</Label>
+                        <Label>照片</Label>
+                    </ComboBox>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" x:Name="StuGrid">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Margin="0 0 0 10" Grid.Column="0" >
+                    <Image x:Name="PreImage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="25 10 25 10"></Image>
+                    <Button 
+                    Style="{StaticResource MaterialDesignIconForegroundButton}"
+                    ToolTip="MaterialDesignIconForegroundButton"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 10"
+                    Click="PreBtnClicked"
+                    Height="40" Width="40">
+                        <materialDesign:PackIcon
+                        Kind="ArrowLeft" Height="30" Width="30" Foreground="#FF787878" />
+                    </Button>
+                </Grid>
+                <Grid Margin="0,0,0,10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image x:Name="CurImage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 10 10 10"></Image>
+                </Grid>
+                <Grid Margin="0,0,0,10" Grid.Column="2">
+                    <Button 
+                    Style="{StaticResource MaterialDesignIconForegroundButton}"
+                    ToolTip="MaterialDesignIconForegroundButton"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 10 10"
+                    Click="NxtBtnClicked"
+                    Height="40" Width="40">
+                        <materialDesign:PackIcon
+                        Kind="ArrowRight" Height="30" Width="30" Foreground="#FF787878" />
+                    </Button>
+                    <Image x:Name="NxtImage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="25 10 25 10"></Image>
+                </Grid>
+            </Grid>
+            <ProgressBar x:Name="ProgressBar" VerticalAlignment="Bottom" Height="10" Value="0" Foreground="#FF151515" BorderBrush="#FF474747" Background="#FF404040"/>
+            <materialDesign:Snackbar
+                IsActive="False"
+                x:Name="PopUpBar">
+                <materialDesign:SnackbarMessage
+                    x:Name="PopUpBarMessage"
+                    ActionClick="PopUpBarConfirmed"
+                    Content=""
+                    ActionContent="确认" />
+            </materialDesign:Snackbar>
+        </Grid>
+    </Grid>
+</Window>

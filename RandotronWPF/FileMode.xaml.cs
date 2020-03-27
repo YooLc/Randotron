@@ -83,6 +83,12 @@ namespace RandotronWPF
                 Smw.Show();
                 this.Close();
             }
+            if (ModeSelector.SelectedIndex == 2)
+            {
+                PhotoModeWindow Pmw = new PhotoModeWindow();
+                Pmw.Show();
+                this.Close();
+            }
         }
 
         private bool GetComfirmStatus() { return StuNameConfirmed; }

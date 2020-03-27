@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,32 +13,31 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
+using System.IO;
 
 namespace RandotronWPF
 {
-    public partial class StuModeWindow : Window
+    public partial class PhotoModeWindow : Window
     {
         private const int MAXS = 1000;
         private int StudentCount = 0, CurrentStudent = 0;
-        private int[] StudentNumList = new int[MAXS];
-        private bool StuNumConfirmed = false;
-        
-        public StuModeWindow()
+        private List<string> StudentPhotoList = new List<string>();
+        private bool StuPhotoConfirmed = false;
+
+        public PhotoModeWindow()
         {
             InitializeComponent();
-            ModeSelector.SelectedIndex = 0; // Set Student Number Mode
+            ModeSelector.SelectedIndex = 2; // Set default mode
             InitAll();
             ClearAndShow();
         }
-
         // Tools
         private void InitAll()
         {
-            StuNumConfirmed = false;
+            StuPhotoConfirmed = false;
             StudentCount = 0;
             CurrentStudent = 0;
-            NumberTextBox.Text = "";
-            PreText.Content = NxtText.Content = CurText.Content = "";
+            // PreText.Content = NxtText.Content = CurText.Content = "";
             ProgressBar.Value = 0;
         }
 
@@ -48,38 +47,49 @@ namespace RandotronWPF
             for (int i = StudentCount - 1; i >= 0; i--)
             {
                 int CurrentStudentIndex = Randotron.Next(i + 1);
-                int TempValue = StudentNumList[CurrentStudentIndex];
-                StudentNumList[CurrentStudentIndex] = StudentNumList[i];
-                StudentNumList[i] = TempValue;
+                string TempValue = StudentPhotoList[CurrentStudentIndex];
+                StudentPhotoList[CurrentStudentIndex] = StudentPhotoList[i];
+                StudentPhotoList[i] = TempValue;
             }
         }
 
         private void ClearAndShow()
         {
-            for (int i = 0; i < MAXS; ++i) StudentNumList[i] = i + 1;
             Random_Shuffle();
             CurrentStudent = 0;
             ProgressBar.Value = 0;
         }
 
-        private void UpdateText(int Cur)
+        private void UpdatePhoto(int Cur)
         {
-            PreText.Content = Cur > 0 ? StudentNumList[Cur - 1].ToString() : "";
-            CurText.Content = StudentNumList[Cur].ToString();
-            NxtText.Content = Cur + 1 < StudentCount ? StudentNumList[Cur + 1].ToString() : "";
-        }
-
-        private int GetStudentNumber(TextBox TextBox)
-        {
-            string content = TextBox.Text;
-            int t = 0;
-            for (int i = 0; i < content.Length; ++i)
+            BitmapImage ImageP = new BitmapImage();
+            BitmapImage ImageC = new BitmapImage();
+            BitmapImage ImageN = new BitmapImage();
+            if (Cur > 0)
             {
-                if (content[i] >= '0' && content[i] <= '9')
-                    t = (t * 10) + content[i] - '0';
-                if (t > MAXS) return t;
+                ImageP.BeginInit();
+                ImageP.UriSource = new Uri(StudentPhotoList[Cur - 1]);
+                ImageP.DecodePixelWidth = 720;
+                ImageP.EndInit();
+                PreImage.Source = ImageP;
             }
-            return t;
+            else PreImage.Source = null;
+            PreImage.Opacity = 0.5;
+            ImageC.BeginInit();
+            ImageC.UriSource = new Uri(StudentPhotoList[Cur]);
+            ImageC.DecodePixelWidth = 720;
+            ImageC.EndInit();
+            CurImage.Source = ImageC;
+            if (Cur + 1 < StudentCount)
+            {
+                ImageN.BeginInit();
+                ImageN.UriSource = new Uri(StudentPhotoList[Cur + 1]);
+                ImageN.DecodePixelWidth = 720;
+                ImageN.EndInit();
+                NxtImage.Source = ImageN;
+            }
+            else NxtImage.Source = null;
+            NxtImage.Opacity = 0.5;
         }
 
         private void PopUpBarConfirmed(object sender, RoutedEventArgs e) { PopUpBar.IsActive = false; FocusBox.Focus(); }
@@ -88,32 +98,32 @@ namespace RandotronWPF
             PopUpBarMessage.Content = Message;
             PopUpBar.IsActive = true;
         }
-        
+
         private void ModeSelectorChange(object sender, RoutedEventArgs e)
         {
-            if (ModeSelector.SelectedIndex == 0) return;
+            if (ModeSelector.SelectedIndex == 2) return;
+            if (ModeSelector.SelectedIndex == 0)
+            {
+                StuModeWindow Smw = new StuModeWindow();
+                Smw.Show();
+                this.Close();
+            }
             if (ModeSelector.SelectedIndex == 1)
             {
                 FileModeWindow Fmw = new FileModeWindow();
                 Fmw.Show();
                 this.Close();
             }
-            if (ModeSelector.SelectedIndex == 2)
-            {
-                PhotoModeWindow Pmw = new PhotoModeWindow();
-                Pmw.Show();
-                this.Close();
-            }
         }
 
-        private bool GetComfirmStatus() { return StuNumConfirmed; }
+        private bool GetComfirmStatus() { return StuPhotoConfirmed; }
         private void RolltoLeft()
         {
             bool HasInited = false;
-            if (!GetComfirmStatus()) { PopUp("无效操作"); return; }
+            if (!GetComfirmStatus()) { PopUp("请选择图片（可选多个）"); return; }
             CurrentStudent -= 1;
             if (CurrentStudent == -1) { PopUp("到头了 已重新生成"); ClearAndShow(); HasInited = true; }
-            UpdateText(CurrentStudent);
+            UpdatePhoto(CurrentStudent);
             double prev = StudentCount > 0 ? (double)(CurrentStudent + 2) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
             if (HasInited) { ProgressBar.Value = goal; return; }
@@ -131,10 +141,10 @@ namespace RandotronWPF
 
         private void RolltoRight(bool isFirstTrial)
         {
-            if (!GetComfirmStatus()) { PopUp("无效操作"); return; }
+            if (!GetComfirmStatus()) { PopUp("请选择图片（可选多个）"); return; }
             if (!isFirstTrial) CurrentStudent += 1;
             if (CurrentStudent >= StudentCount) { ClearAndShow(); PopUp("到头了 已重新生成"); }
-            UpdateText(CurrentStudent);
+            UpdatePhoto(CurrentStudent);
             double prev = StudentCount - 1 > 0 ? (double)(CurrentStudent) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
             Thread PBthread = new Thread(new ThreadStart(() =>
@@ -157,18 +167,29 @@ namespace RandotronWPF
         // Functions
         private void PreBtnClicked(object sender, RoutedEventArgs e) { RolltoLeft(); FocusBox.Focus(); }
         private void NxtBtnClicked(object sender, RoutedEventArgs e) { RolltoRight(false); FocusBox.Focus(); }
-        private void NumberModeConfirmed(object sender, RoutedEventArgs e)
+
+        private void FileModeConfirmed(object sender, RoutedEventArgs e)
         {
-            int Tnumber = GetStudentNumber(NumberTextBox);
-            if (Tnumber <= 0) { PopUp("请输入正确的学生人数，范围为[1, 1000]"); return; }
-            if (Tnumber > MAXS) { PopUp("最多仅允许 " + MAXS.ToString() + " 个学生"); return; }
-            NumberTextBox.Text = Tnumber.ToString();
-            StudentCount = Tnumber;
-            ClearAndShow();
-            UpdateText(CurrentStudent);
-            StuNumConfirmed = true;
-            RolltoRight(true);
-            FocusBox.Focus();
+            Microsoft.Win32.OpenFileDialog FileDialog = new Microsoft.Win32.OpenFileDialog();
+            FileDialog.Filter = "图片 (*.png, *.jpg) | *.txt; *.jpg";
+            FileDialog.Multiselect = true;
+            if (FileDialog.ShowDialog() == true)
+            {
+                string[] files = null;
+                files = FileDialog.FileNames;
+                StudentCount = 0;
+                for(int i = 0; i < files.Length; ++i)
+                {
+                    StudentCount++;
+                    string StuPhoto = files[i];
+                    StudentPhotoList.Add(StuPhoto);
+                }
+                ClearAndShow();
+                UpdatePhoto(CurrentStudent);
+                StuPhotoConfirmed = true;
+                RolltoRight(true);
+                FocusBox.Focus();
+            }
         }
     }
 }

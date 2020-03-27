@@ -77,6 +77,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PhotoMode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StuMode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -87,6 +91,9 @@
     </Compile>
     <Compile Include="FileMode.xaml.cs">
       <DependentUpon>FileMode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoMode.xaml.cs">
+      <DependentUpon>PhotoMode.xaml</DependentUpon>
     </Compile>
     <Compile Include="StuMode.xaml.cs">
       <DependentUpon>StuMode.xaml</DependentUpon>
