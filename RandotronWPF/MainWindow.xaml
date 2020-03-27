@@ -23,7 +23,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <Label x:Name="label" Content="Randotron" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Exo 2" FontSize="30" FontWeight="Bold" Foreground="#FF000000"/>
+                    <Label x:Name="label" Content="Randotron" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Corbel" FontSize="30" FontWeight="Bold" Foreground="#FF000000"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <StackPanel Orientation="Horizontal" x:Name="StuNumPanel">
@@ -39,7 +39,7 @@
                             <materialDesign:HintAssist.Hint>
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
                                     <materialDesign:PackIcon Kind="AccountTick" />
-                                    <TextBlock Margin="2 0 0 0" FontFamily="怀源黑体 CN">学生人数</TextBlock>
+                                    <TextBlock Margin="2 0 0 0" FontFamily="Consolas, 思源黑体 CN">学生人数</TextBlock>
                                 </StackPanel>
                             </materialDesign:HintAssist.Hint>
                         </TextBox>
@@ -86,14 +86,14 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1" x:Name="StuGrid">
-            <Grid>
+            <Grid Margin="0,-40,-0.444,-0.111">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid Margin="0 0 0 10" Grid.Column="0" >
-                    <Label x:Name="PreText" FontFamily="Exo 2, 怀源黑体 CN" FontSize="50" FontWeight="ExtraBold" Foreground="Gray" 
+                    <Label x:Name="PreText" FontFamily="Consolas, 思源黑体 CN" FontSize="50" FontWeight="ExtraBold" Foreground="Gray" 
                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 25"/>
                     <Button 
                     Style="{StaticResource MaterialDesignIconForegroundButton}"
@@ -106,7 +106,7 @@
                     </Button>
                 </Grid>
                 <Grid Margin="0,0,0,10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label x:Name="CurText" FontFamily="Exo 2, 怀源黑体 CN" FontSize="80" FontWeight="ExtraBold" Foreground="Black"
+                    <Label x:Name="CurText" FontFamily="Consolas, 思源黑体 CN" FontSize="80" FontWeight="ExtraBold" Foreground="Black"
                            Margin="0 0 0 25"></Label>
                 </Grid>
                 <Grid Margin="0,0,0,10" Grid.Column="2">
@@ -119,11 +119,11 @@
                         <materialDesign:PackIcon
                         Kind="ArrowRight" Height="30" Width="30" Foreground="#FF787878" />
                     </Button>
-                    <Label x:Name="NxtText" FontFamily="Exo 2, 怀源黑体 CN" FontSize="50" FontWeight="ExtraBold" Foreground="Gray"
+                    <Label x:Name="NxtText" FontFamily="Consolas, 思源黑体 CN" FontSize="50" FontWeight="ExtraBold" Foreground="Gray"
                            HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0 0 0 25"></Label>
                 </Grid>
             </Grid>
-            <ProgressBar x:Name="ProgressBar" VerticalAlignment="Bottom" Height="10" Value="0" Foreground="#FF151515" BorderBrush="#FF474747" Background="#FF404040"/>
+            <ProgressBar x:Name="ProgressBar" VerticalAlignment="Bottom" Height="10" Value="0" Foreground="#FF151515" BorderBrush="#FF474747" Background="#FF606060"/>
             <materialDesign:Snackbar
                 IsActive="False"
                 x:Name="PopUpBar">
