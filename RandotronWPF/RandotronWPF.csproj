@@ -73,7 +73,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="FileMode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StuMode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -81,8 +85,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="FileMode.xaml.cs">
+      <DependentUpon>FileMode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StuMode.xaml.cs">
+      <DependentUpon>StuMode.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

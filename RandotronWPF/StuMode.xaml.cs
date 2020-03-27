@@ -16,38 +16,30 @@ using System.Threading;
 
 namespace RandotronWPF
 {
-    public partial class MainWindow : Window
+    public partial class StuModeWindow : Window
     {
         private const int MAXS = 1000;
         private int StudentCount = 0, CurrentStudent = 0;
         private int[] StudentNumList = new int[MAXS];
         private bool StuNumConfirmed = false;
         
-        public MainWindow()
+        public StuModeWindow()
         {
             InitializeComponent();
-            ModeSelector.SelectedIndex = 0; // Set default mode
+            ModeSelector.SelectedIndex = 0; // Set Student Number Mode
             InitAll();
-            EnableMode();
             ClearAndShow();
         }
+
         // Tools
         private void InitAll()
         {
             StuNumConfirmed = false;
             StudentCount = 0;
-            StuNumPanel.Visibility = Visibility.Hidden;
             CurrentStudent = 0;
             NumberTextBox.Text = "";
             PreText.Content = NxtText.Content = CurText.Content = "";
             ProgressBar.Value = 0;
-        }
-
-        private void EnableMode()
-        {
-            if (ModeSelector.SelectedIndex == 0) StuNumPanel.Visibility = Visibility.Visible;
-            if (ModeSelector.SelectedIndex != 1) FileBtn.Visibility = Visibility.Hidden;
-            else FileBtn.Visibility = Visibility.Visible;
         }
 
         private void Random_Shuffle()
@@ -99,26 +91,43 @@ namespace RandotronWPF
         
         private void ModeSelectorChange(object sender, RoutedEventArgs e)
         {
-            InitAll();
-            EnableMode();
+            if (ModeSelector.SelectedIndex == 0) return;
+            if (ModeSelector.SelectedIndex == 1)
+            {
+                FileModeWindow Fmw = new FileModeWindow();
+                Fmw.Show();
+                this.Close();
+            }
         }
 
         private bool GetComfirmStatus() { return StuNumConfirmed; }
         private void RolltoLeft()
         {
+            bool HasInited = false;
             if (!GetComfirmStatus()) { PopUp("无效操作"); return; }
             CurrentStudent -= 1;
-            if (CurrentStudent == -1) { PopUp("到头了 已重新生成"); ClearAndShow(); }
+            if (CurrentStudent == -1) { PopUp("到头了 已重新生成"); ClearAndShow(); HasInited = true; }
             UpdateText(CurrentStudent);
+            double prev = StudentCount > 0 ? (double)(CurrentStudent + 2) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
-            ProgressBar.Value = goal;
+            if (HasInited) { ProgressBar.Value = goal; return; }
+            Thread PBthread = new Thread(new ThreadStart(() =>
+            {
+                for (int i = (int)System.Math.Ceiling(prev); i >= goal; --i)
+                {
+                    this.ProgressBar.Dispatcher.BeginInvoke((ThreadStart)delegate { this.ProgressBar.Value = i; });
+                    Thread.Sleep(15);
+                }
+                this.ProgressBar.Dispatcher.BeginInvoke((ThreadStart)delegate { this.ProgressBar.Value = goal; });
+            }));
+            PBthread.Start();
         }
 
-        private void RolltoRight()
+        private void RolltoRight(bool isFirstTrial)
         {
             if (!GetComfirmStatus()) { PopUp("无效操作"); return; }
-            CurrentStudent += 1;
-            if (CurrentStudent >= StudentCount) { PopUp("到头了 已重新生成"); ClearAndShow(); }
+            if (!isFirstTrial) CurrentStudent += 1;
+            if (CurrentStudent >= StudentCount) { ClearAndShow(); PopUp("到头了 已重新生成"); }
             UpdateText(CurrentStudent);
             double prev = StudentCount - 1 > 0 ? (double)(CurrentStudent) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
@@ -136,35 +145,24 @@ namespace RandotronWPF
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter) RolltoRight();
+            if (e.Key == Key.Enter) RolltoRight(false);
         }
 
         // Functions
         private void PreBtnClicked(object sender, RoutedEventArgs e) { RolltoLeft(); FocusBox.Focus(); }
-        private void NxtBtnClicked(object sender, RoutedEventArgs e) { RolltoRight(); FocusBox.Focus(); }
+        private void NxtBtnClicked(object sender, RoutedEventArgs e) { RolltoRight(false); FocusBox.Focus(); }
         private void NumberModeConfirmed(object sender, RoutedEventArgs e)
         {
             int Tnumber = GetStudentNumber(NumberTextBox);
             if (Tnumber <= 0) { PopUp("请输入正确的学生人数，范围为[1, 1000]"); return; }
-            if (Tnumber > MAXS) { PopUp("最多仅允许 1000 个学生"); return; }
+            if (Tnumber > MAXS) { PopUp("最多仅允许 " + MAXS.ToString() + " 个学生"); return; }
             NumberTextBox.Text = Tnumber.ToString();
             StudentCount = Tnumber;
             ClearAndShow();
             UpdateText(CurrentStudent);
             StuNumConfirmed = true;
+            RolltoRight(true);
             FocusBox.Focus();
-        }
-        
-        private void FileModeConfirmed(object sender, RoutedEventArgs e)
-        {
-            // PopUp("哦哦哦");
-            Microsoft.Win32.OpenFileDialog FileDialog = new Microsoft.Win32.OpenFileDialog();
-            FileDialog.Filter = "Excel 表格 (*.xlsx , *.xls) | *.xlsx; *.xls";
-            if (FileDialog.ShowDialog() == true)
-            {
-                // DataTable dt = GetData("E:\\test.xls");
-                PopUp(FileDialog.FileName); 
-            }
         }
     }
 }
