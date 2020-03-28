@@ -95,9 +95,9 @@ namespace RandotronWPF
         private void RolltoLeft()
         {
             bool HasInited = false;
-            if (!GetComfirmStatus()) { PopUp("请选择文件，格式为：一行一个人名。"); return; }
+            if (!GetComfirmStatus()) { PopUp(RandotronWPF.Properties.Resources.InvalidFileOperation); return; }
             CurrentStudent -= 1;
-            if (CurrentStudent == -1) { PopUp("到头了 已重新生成"); ClearAndShow(); HasInited = true; }
+            if (CurrentStudent == -1) { PopUp(RandotronWPF.Properties.Resources.AtTheEnd); ClearAndShow(); HasInited = true; }
             UpdateText(CurrentStudent);
             double prev = StudentCount > 0 ? (double)(CurrentStudent + 2) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
@@ -116,9 +116,9 @@ namespace RandotronWPF
 
         private void RolltoRight(bool isFirstTrial)
         {
-            if (!GetComfirmStatus()) { PopUp("请选择文件，格式为：一行一个人名。"); return; }
+            if (!GetComfirmStatus()) { PopUp(RandotronWPF.Properties.Resources.InvalidFileOperation); return; }
             if (!isFirstTrial) CurrentStudent += 1;
-            if (CurrentStudent >= StudentCount) { ClearAndShow(); PopUp("到头了 已重新生成"); }
+            if (CurrentStudent >= StudentCount) { ClearAndShow(); PopUp(RandotronWPF.Properties.Resources.AtTheEnd); }
             UpdateText(CurrentStudent);
             double prev = StudentCount - 1 > 0 ? (double)(CurrentStudent) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
@@ -146,7 +146,7 @@ namespace RandotronWPF
         private void FileModeConfirmed(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog FileDialog = new Microsoft.Win32.OpenFileDialog();
-            FileDialog.Filter = "文本文档 (*.txt) | *.txt";
+            FileDialog.Filter = RandotronWPF.Properties.Resources.FileModeFilter;
             FileStream fs;
             if (FileDialog.ShowDialog() == true)
             {

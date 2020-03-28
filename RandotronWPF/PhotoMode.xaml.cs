@@ -37,7 +37,6 @@ namespace RandotronWPF
             StuPhotoConfirmed = false;
             StudentCount = 0;
             CurrentStudent = 0;
-            // PreText.Content = NxtText.Content = CurText.Content = "";
             ProgressBar.Value = 0;
         }
 
@@ -120,9 +119,9 @@ namespace RandotronWPF
         private void RolltoLeft()
         {
             bool HasInited = false;
-            if (!GetComfirmStatus()) { PopUp("请选择图片（可选多个）"); return; }
+            if (!GetComfirmStatus()) { PopUp(RandotronWPF.Properties.Resources.InvalidPhotoOperation); return; }
             CurrentStudent -= 1;
-            if (CurrentStudent == -1) { PopUp("到头了 已重新生成"); ClearAndShow(); HasInited = true; }
+            if (CurrentStudent == -1) { PopUp(RandotronWPF.Properties.Resources.AtTheEnd); ClearAndShow(); HasInited = true; }
             UpdatePhoto(CurrentStudent);
             double prev = StudentCount > 0 ? (double)(CurrentStudent + 2) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
@@ -141,9 +140,9 @@ namespace RandotronWPF
 
         private void RolltoRight(bool isFirstTrial)
         {
-            if (!GetComfirmStatus()) { PopUp("请选择图片（可选多个）"); return; }
+            if (!GetComfirmStatus()) { PopUp(RandotronWPF.Properties.Resources.InvalidPhotoOperation); return; }
             if (!isFirstTrial) CurrentStudent += 1;
-            if (CurrentStudent >= StudentCount) { ClearAndShow(); PopUp("到头了 已重新生成"); }
+            if (CurrentStudent >= StudentCount) { ClearAndShow(); PopUp(RandotronWPF.Properties.Resources.AtTheEnd); }
             UpdatePhoto(CurrentStudent);
             double prev = StudentCount - 1 > 0 ? (double)(CurrentStudent) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
@@ -171,7 +170,7 @@ namespace RandotronWPF
         private void FileModeConfirmed(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog FileDialog = new Microsoft.Win32.OpenFileDialog();
-            FileDialog.Filter = "图片 (*.png, *.jpg) | *.txt; *.jpg";
+            FileDialog.Filter = RandotronWPF.Properties.Resources.PhotoModeFilter;
             FileDialog.Multiselect = true;
             if (FileDialog.ShowDialog() == true)
             {

@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RandotronWPF"
+        xmlns:p="clr-namespace:RandotronWPF.Properties"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         KeyDown="Window_KeyDown"
         x:Name="StuMode"
-        Title="Randotron" Height="600" Width="800" MinWidth="580" MinHeight="300" Topmost="True" Style="{DynamicResource Exo 2}">
+        Title="{x:Static p:Resources.Title}" Height="600" Width="800" MinWidth="580" MinHeight="300" Topmost="True" Style="{DynamicResource Exo 2}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -40,7 +41,8 @@
                             <materialDesign:HintAssist.Hint>
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
                                     <materialDesign:PackIcon Kind="AccountTick" />
-                                    <TextBlock Margin="2 0 0 0" FontFamily="怀源黑体 CN">学生人数</TextBlock>
+                                    <TextBlock Margin="2 0 0 0" FontFamily="怀源黑体 CN"
+                                               Text="{x:Static p:Resources.StudentAmount}" />
                                 </StackPanel>
                             </materialDesign:HintAssist.Hint>
                         </TextBox>
@@ -61,14 +63,13 @@
                 <Grid Grid.Column="2">
                     <ComboBox
                     x:Name="ModeSelector"
-                    Width="40"
                     Margin="0 0 10 0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     SelectionChanged="ModeSelectorChange">
-                        <Label>学号</Label>
-                        <Label>人名</Label>
-                        <Label>照片</Label>
+                        <Label Content="{x:Static p:Resources.StuNumberMode}" />
+                        <Label Content="{x:Static p:Resources.StuFileMode}" />
+                        <Label Content="{x:Static p:Resources.StuPhotoMode}" />
                     </ComboBox>
                 </Grid>
             </Grid>
@@ -119,7 +120,7 @@
                     x:Name="PopUpBarMessage"
                     ActionClick="PopUpBarConfirmed"
                     Content=""
-                    ActionContent="确认" />
+                    ActionContent="{x:Static p:Resources.Confirm}" />
             </materialDesign:Snackbar>
         </Grid>
     </Grid>

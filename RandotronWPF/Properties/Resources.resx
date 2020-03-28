@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,51 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="StudentAmount" xml:space="preserve">
+    <value>学生人数</value>
+  </data>
+  <data name="StuFileMode" xml:space="preserve">
+    <value>人名</value>
+  </data>
+  <data name="StuNumberMode" xml:space="preserve">
+    <value>学号</value>
+  </data>
+  <data name="StuPhotoMode" xml:space="preserve">
+    <value>照片</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Randotron</value>
+  </data>
+  <data name="AtTheEnd" xml:space="preserve">
+    <value>到头了  已重新生成</value>
+  </data>
+  <data name="FileModeFilter" xml:space="preserve">
+    <value>文本文档 (*.txt) | *.txt</value>
+  </data>
+  <data name="HugeNumber" xml:space="preserve">
+    <value>最多仅允许1000 个学生</value>
+  </data>
+  <data name="InvalidFileOperation" xml:space="preserve">
+    <value>请选择文件，格式为：一行一个人名。</value>
+  </data>
+  <data name="InvalidNumber" xml:space="preserve">
+    <value>请输入正确的学生人数，范围为 [1, 1000]</value>
+  </data>
+  <data name="InvalidOperation" xml:space="preserve">
+    <value>无效操作</value>
+  </data>
+  <data name="InvalidPhotoOperation" xml:space="preserve">
+    <value>请选择图片（可选多个）</value>
+  </data>
+  <data name="PhotoModeFilter" xml:space="preserve">
+    <value>图片 (*.png, *.jpg) | *.txt; *.jpg</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
 </root>

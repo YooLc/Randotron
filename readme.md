@@ -17,13 +17,13 @@ This project's name is from the famous TV series Rick and Morty.
 - 等概率地生成学生学号。
 - Still developing，not completed.
 - 开发中，功能未完善。
+- Supports English
+- 支持中英文
 ## Known Bugs / 已知问题
-- Only supports Chinese.
-- 仅支持中文。
 - File Mode and Photo Mode are unstable
 - 文件模式和照片模式不稳定
-- Cannot open this project in VS Studio
-- VS 中不能正常打开本项目
+- Cannot open this project in VS Studio sometime
+- VS 中可能不能正常打开本项目
 
 # Package Used
 - [MaterialDesignInXamlToolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)

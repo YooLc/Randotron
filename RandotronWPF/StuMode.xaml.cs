@@ -34,6 +34,7 @@ namespace RandotronWPF
         // Tools
         private void InitAll()
         {
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             StuNumConfirmed = false;
             StudentCount = 0;
             CurrentStudent = 0;
@@ -110,9 +111,9 @@ namespace RandotronWPF
         private void RolltoLeft()
         {
             bool HasInited = false;
-            if (!GetComfirmStatus()) { PopUp("无效操作"); return; }
+            if (!GetComfirmStatus()) { PopUp(RandotronWPF.Properties.Resources.InvalidOperation); return; }
             CurrentStudent -= 1;
-            if (CurrentStudent == -1) { PopUp("到头了 已重新生成"); ClearAndShow(); HasInited = true; }
+            if (CurrentStudent == -1) { PopUp(RandotronWPF.Properties.Resources.AtTheEnd); ClearAndShow(); HasInited = true; }
             UpdateText(CurrentStudent);
             double prev = StudentCount > 0 ? (double)(CurrentStudent + 2) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
@@ -131,9 +132,9 @@ namespace RandotronWPF
 
         private void RolltoRight(bool isFirstTrial)
         {
-            if (!GetComfirmStatus()) { PopUp("无效操作"); return; }
+            if (!GetComfirmStatus()) { PopUp(RandotronWPF.Properties.Resources.InvalidOperation); return; }
             if (!isFirstTrial) CurrentStudent += 1;
-            if (CurrentStudent >= StudentCount) { ClearAndShow(); PopUp("到头了 已重新生成"); }
+            if (CurrentStudent >= StudentCount) { ClearAndShow(); PopUp(RandotronWPF.Properties.Resources.AtTheEnd); }
             UpdateText(CurrentStudent);
             double prev = StudentCount - 1 > 0 ? (double)(CurrentStudent) / StudentCount * 100 : 0;
             double goal = StudentCount > 0 ? (double)(CurrentStudent + 1) / StudentCount * 100 : 0;
@@ -160,8 +161,8 @@ namespace RandotronWPF
         private void NumberModeConfirmed(object sender, RoutedEventArgs e)
         {
             int Tnumber = GetStudentNumber(NumberTextBox);
-            if (Tnumber <= 0) { PopUp("请输入正确的学生人数，范围为[1, 1000]"); return; }
-            if (Tnumber > MAXS) { PopUp("最多仅允许 " + MAXS.ToString() + " 个学生"); return; }
+            if (Tnumber <= 0) { PopUp(RandotronWPF.Properties.Resources.InvalidNumber); return; }
+            if (Tnumber > MAXS) { PopUp(RandotronWPF.Properties.Resources.HugeNumber); return; }
             NumberTextBox.Text = Tnumber.ToString();
             StudentCount = Tnumber;
             ClearAndShow();

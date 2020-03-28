@@ -27,3 +27,9 @@ F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\FileMode.g.cs
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\FileMode.baml
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\PhotoMode.g.cs
 F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\PhotoMode.baml
+F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\en-US\RandotronWPF.resources.dll
+F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\bin\Debug\zh-CN\RandotronWPF.resources.dll
+F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\RandotronWPF.Properties.Resources.en-US.resources
+F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\RandotronWPF.Properties.Resources.zh-CN.resources
+F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\en-US\RandotronWPF.resources.dll
+F:\OI\For Fun\Randotron WPF\RandotronWPF\RandotronWPF\obj\Debug\zh-CN\RandotronWPF.resources.dll

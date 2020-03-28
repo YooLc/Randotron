@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RandotronWPF"
+        xmlns:p="clr-namespace:RandotronWPF.Properties"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         KeyDown="Window_KeyDown"
@@ -43,14 +44,13 @@
                 <Grid Grid.Column="2">
                     <ComboBox
                     x:Name="ModeSelector"
-                    Width="40"
                     Margin="0 0 10 0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     SelectionChanged="ModeSelectorChange">
-                        <Label>学号</Label>
-                        <Label>人名</Label>
-                        <Label>照片</Label>
+                        <Label Content="{x:Static p:Resources.StuNumberMode}" />
+                        <Label Content="{x:Static p:Resources.StuFileMode}" />
+                        <Label Content="{x:Static p:Resources.StuPhotoMode}" />
                     </ComboBox>
                 </Grid>
             </Grid>
@@ -107,7 +107,7 @@
                     x:Name="PopUpBarMessage"
                     ActionClick="PopUpBarConfirmed"
                     Content=""
-                    ActionContent="确认" />
+                    ActionContent="{x:Static p:Resources.Confirm}" />
             </materialDesign:Snackbar>
         </Grid>
     </Grid>
