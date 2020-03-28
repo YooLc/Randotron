@@ -34,7 +34,6 @@ namespace RandotronWPF
         // Tools
         private void InitAll()
         {
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             StuNumConfirmed = false;
             StudentCount = 0;
             CurrentStudent = 0;
