@@ -11,6 +11,10 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="Exo 2">
+                <Setter Property="TextElement.FontFamily" Value="Resources/#思源黑体 CN"/>
+                <Setter Property="TextElement.FontFamily" Value="Resources/#Exo 2"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
