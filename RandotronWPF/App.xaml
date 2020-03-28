@@ -11,10 +11,14 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="Exo 2">
-                <Setter Property="TextElement.FontFamily" Value="Resources/#思源黑体 CN"/>
-                <Setter Property="TextElement.FontFamily" Value="Resources/#Exo 2"/>
-            </Style>
+            <FontFamily x:Key="CustomBold">
+                 /Resources/Exo2.ttf#Exo 2, 
+                /Resources/SourceHanSansSC-Bold.otf#思源黑体
+            </FontFamily>
+            <FontFamily x:Key="CustomRegular">
+                /Resources/Exo2-Regular.ttf#Exo 2,
+                /Resources/SourceHanSansSC-Regular.otf#思源黑体
+            </FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -158,8 +158,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Resources\SourceHanSansCN-Bold.otf" />
-    <Resource Include="Resources\SourceHanSansCN-Regular.otf" />
+    <Resource Include="Resources\SourceHanSansSC-Regular.otf" />
+    <Resource Include="Resources\SourceHanSansSC-Bold.otf" />
     <Resource Include="Resources\Exo2-Regular.ttf" />
     <Resource Include="Resources\Exo2.ttf" />
   </ItemGroup>

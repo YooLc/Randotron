@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         KeyDown="Window_KeyDown"
         x:Name="StuMode"
-        Title="{x:Static p:Resources.Title}" Height="600" Width="800" MinWidth="580" MinHeight="300" Topmost="True" Style="{DynamicResource Exo 2}">
+        Title="{x:Static p:Resources.Title}" Height="600" Width="800" MinWidth="580" MinHeight="300" Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -24,7 +24,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <Label x:Name="label" Content="Randotron" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="#FF000000"/>
+                    <Label x:Name="label" Content="Randotron" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           FontFamily="{StaticResource CustomBold}" FontSize="30" FontWeight="Bold" Foreground="#FF000000"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <StackPanel Orientation="Horizontal" x:Name="StuNumPanel">
@@ -37,11 +38,12 @@
                         FontWeight="Regular"
                         VerticalAlignment="Center"
                         Width="200"
+                        FontFamily="{StaticResource CustomRegular}"
                         Margin="10 0 0 0">
                             <materialDesign:HintAssist.Hint>
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
                                     <materialDesign:PackIcon Kind="AccountTick" />
-                                    <TextBlock Margin="2 0 0 0" FontFamily="怀源黑体 CN"
+                                    <TextBlock Margin="2 0 0 0" FontFamily="{StaticResource CustomRegular}"
                                                Text="{x:Static p:Resources.StudentAmount}" />
                                 </StackPanel>
                             </materialDesign:HintAssist.Hint>
@@ -66,10 +68,11 @@
                     Margin="0 0 10 0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    SelectionChanged="ModeSelectorChange">
-                        <Label Content="{x:Static p:Resources.StuNumberMode}" />
-                        <Label Content="{x:Static p:Resources.StuFileMode}" />
-                        <Label Content="{x:Static p:Resources.StuPhotoMode}" />
+                    SelectionChanged="ModeSelectorChange" 
+                    FontFamily="{StaticResource CustomRegular}">
+                        <Label Content="{x:Static p:Resources.StuNumberMode}" FontFamily="{StaticResource CustomRegular}"/>
+                        <Label Content="{x:Static p:Resources.StuFileMode}" FontFamily="{StaticResource CustomRegular}"/>
+                        <Label Content="{x:Static p:Resources.StuPhotoMode}" FontFamily="{StaticResource CustomRegular}"/>
                     </ComboBox>
                 </Grid>
             </Grid>
@@ -83,7 +86,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid Margin="0 0 0 10" Grid.Column="0" >
                     <Label x:Name="PreText" FontSize="50" FontWeight="ExtraBold" Foreground="Gray" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 25"/>
+                           HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 25" FontFamily="{StaticResource CustomBold}"/>
                     <Button 
                     Style="{StaticResource MaterialDesignIconForegroundButton}"
                     ToolTip="MaterialDesignIconForegroundButton"
@@ -96,7 +99,7 @@
                 </Grid>
                 <Grid Margin="0,0,0,10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label x:Name="CurText" FontSize="80" FontWeight="ExtraBold" Foreground="Black"
-                           Margin="0 0 0 25"></Label>
+                           Margin="0 0 0 25" FontFamily="{StaticResource CustomBold}"></Label>
                 </Grid>
                 <Grid Margin="0,0,0,10" Grid.Column="2">
                     <Button 
@@ -109,7 +112,7 @@
                         Kind="ArrowRight" Height="30" Width="30" Foreground="#FF787878" />
                     </Button>
                     <Label x:Name="NxtText" FontSize="50" FontWeight="ExtraBold" Foreground="Gray"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0 0 0 25"></Label>
+                           HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0 0 0 25" FontFamily="{StaticResource CustomBold}"></Label>
                 </Grid>
             </Grid>
             <ProgressBar x:Name="ProgressBar" VerticalAlignment="Bottom" Height="10" Value="0" Foreground="#FF151515" BorderBrush="#FF474747" Background="#FF404040"/>

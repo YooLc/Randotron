@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         KeyDown="Window_KeyDown"
         x:Name="PhotoMode"
-        Title="Randotron" Height="600" Width="800" MinWidth="580" MinHeight="300" Topmost="True" Style="{DynamicResource Exo 2}">
+        Title="Randotron" Height="600" Width="800" MinWidth="580" MinHeight="300" Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -24,7 +24,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <Label x:Name="label" Content="Randotron" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="#FF000000"/>
+                    <Label x:Name="label" Content="Randotron" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           FontFamily="{StaticResource CustomBold}" FontSize="30" FontWeight="Bold" Foreground="#FF000000"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Button
@@ -47,10 +48,11 @@
                     Margin="0 0 10 0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    SelectionChanged="ModeSelectorChange">
-                        <Label Content="{x:Static p:Resources.StuNumberMode}" />
-                        <Label Content="{x:Static p:Resources.StuFileMode}" />
-                        <Label Content="{x:Static p:Resources.StuPhotoMode}" />
+                    SelectionChanged="ModeSelectorChange"
+                    FontFamily="{StaticResource CustomRegular}">
+                        <Label Content="{x:Static p:Resources.StuNumberMode}" FontFamily="{StaticResource CustomRegular}"/>
+                        <Label Content="{x:Static p:Resources.StuFileMode}" FontFamily="{StaticResource CustomRegular}"/>
+                        <Label Content="{x:Static p:Resources.StuPhotoMode}" FontFamily="{StaticResource CustomRegular}"/>
                     </ComboBox>
                 </Grid>
             </Grid>
