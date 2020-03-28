@@ -175,6 +175,7 @@ namespace RandotronWPF
             FileDialog.Multiselect = true;
             if (FileDialog.ShowDialog() == true)
             {
+                StudentPhotoList.Clear();
                 string[] files = null;
                 files = FileDialog.FileNames;
                 StudentCount = 0;

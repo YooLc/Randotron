@@ -150,6 +150,7 @@ namespace RandotronWPF
             FileStream fs;
             if (FileDialog.ShowDialog() == true)
             {
+                StudentNameList.Clear();
                 fs = new FileStream(FileDialog.FileName, System.IO.FileMode.Open, FileAccess.Read);
                 using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
                 {
